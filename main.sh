@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 start() {
     # 获取脚本文件路径
     export DST_SHELL_PATH=$(dirname $(readlink -f "$0"))
