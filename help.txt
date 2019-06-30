@@ -11,4 +11,5 @@
     start                启动服务器
     stop                 停止服务器
     restart              重启服务器
+    log                 服务器日志
     update               更新服务器

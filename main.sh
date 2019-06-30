@@ -41,6 +41,9 @@ main() {
         "update")
             Update
         ;;
+        "log")
+            Log
+        ;;
         "init")
             Init
         ;;

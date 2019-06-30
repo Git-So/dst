@@ -11,7 +11,8 @@ List() {
                         }{print $1,"+++++",$2; \
                         count=count+1;}END{ \
                         print "----------","+++++","----------"; \
-                        printf("统计: +++++ 共%s个模块",count);
+                        printf("统计: +++++ 共%s个模块",count); \
+                        print "" \
                         }' \
         ${DST_SHELL_PATH}/cache/mod/list.cache  \
     | sed "s/^//g" \
@@ -132,8 +133,8 @@ Clear() {
     cp -f $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Master/modoverrides.lua $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Caves/modoverrides.lua
 
     # 清理
-    rm ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua
-    rm ${DST_SHELL_PATH}/cache/mod/modoverrides.lua
+    #rm ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua
+    #rm ${DST_SHELL_PATH}/cache/mod/modoverrides.lua
 }
 
 # mod cache

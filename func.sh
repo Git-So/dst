@@ -32,6 +32,12 @@ Update() {
     init
 }
 
+# log
+# dst 日志
+Log() {
+    docker logs dst
+}
+
 # init
 # 初始化 dst
 Init() {

@@ -9,8 +9,10 @@ List() {
 # save load
 # 加载存档
 Load() {
-    rm $HOME/.klei/DoNotStarveTogether
-    cp ${DST_SHELL_PATH}/backup/save/$1/* $HOME/.klei/
+    docker stop dst
+    rm -rf $HOME/.klei/DoNotStarveTogether
+    cp -rf ${DST_SHELL_PATH}/backup/save/$1/* $HOME/.klei/
+    docker start dst
 }
 
 # save now
