@@ -9,15 +9,15 @@ List() {
 # save load
 # 加载存档
 Load() {
-    rm ~/.klei/DoNotStarveTogether
-    cp ${DST_SHELL_PATH}/backup/save/$1/* ~/.klei/
+    rm $HOME/.klei/DoNotStarveTogether
+    cp ${DST_SHELL_PATH}/backup/save/$1/* $HOME/.klei/
 }
 
 # save now
 # 备份当前存档
 Now() {
     dirName="$(date +%Y-%m-%d-%T)"
-    rsync -a "~/.klei/DoNotStarveTogether" "${DST_SHELL_PATH}/backup/save/${dirName}"
+    rsync -a "$HOME/.klei/DoNotStarveTogether" "${DST_SHELL_PATH}/backup/save/${dirName}"
 }
 
 # save help

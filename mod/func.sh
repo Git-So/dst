@@ -5,7 +5,7 @@
 List() {
     Cache
     echo
-    awk -F "++++++++++" 'BEGIN{print "编号","+++++","名称"; \
+    awk -F "\++" 'BEGIN{print "编号","+++++","名称"; \
                         print "----------","+++++","----------"; \
                         count=0
                         }{print $1,"+++++",$2; \
@@ -28,7 +28,7 @@ Info() {
         echo
         grep "^${1}++++++++++" ${DST_SHELL_PATH}/cache/mod/list.cache \
         | head -n 1 \
-        | awk -F '++++++++++' '{}{ \
+        | awk -F '\++' '{}{ \
         id=$1; \
         name=$2; \
         desc=$3; \
@@ -109,7 +109,7 @@ Clear() {
     echo "return {" > ${DST_SHELL_PATH}/cache/mod/modoverrides.lua
     echo "" > ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua
 
-    for id in $(awk -F "++++++++++" '{print $1}' ${DST_SHELL_PATH}/cache/mod/list.cache)
+    for id in $(awk -F "\++" '{print $1}' ${DST_SHELL_PATH}/cache/mod/list.cache)
     do
         if [ $(isNumber "${id}") -eq 1 ];then
             # 加载更新
@@ -127,8 +127,9 @@ Clear() {
     echo "}" >> ${DST_SHELL_PATH}/cache/mod/modoverrides.lua
 
     # 覆盖
-    mv -f ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua ~/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods/dedicated_server_mods_setup.lua
-    mv -f ${DST_SHELL_PATH}/cache/mod/modoverrides.lua ~/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Master/modoverrides.lua
+    mv -f ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods/dedicated_server_mods_setup.lua
+    mv -f ${DST_SHELL_PATH}/cache/mod/modoverrides.lua $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Master/modoverrides.lua
+    cp -f $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Master/modoverrides.lua $HOME/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/Caves/modoverrides.lua
 
     # 清理
     rm ${DST_SHELL_PATH}/cache/mod/dedicated_server_mods_setup.lua
@@ -140,15 +141,16 @@ Clear() {
 Cache() {
     echo "" > ${DST_SHELL_PATH}/cache/mod/list.cache
     # 获取当前加载 mod
-    modFile="~/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods/dedicated_server_mods_setup.lua"
+    modFile="${HOME}/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods/dedicated_server_mods_setup.lua"
     # modFile="/home/so/Documents/test/1.text"
-    modsPath="~/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods"
+    modsPath="${HOME}/.klei/DoNotStarveTogether/DoNotStarveTogether/Cluster_1/mods"
     # modsPath="/home/so/.steam/steam/steamapps/common/Don't Starve Together/mods"
     for id in $(grep "^\s*ServerModSetup(\([0-9]\+\))" ${modFile} | sed "s/^\s*ServerModSetup(\([0-9]\+\))/\1/g")
     do
         if [ $(isNumber "${id}") -eq 1 ];then
             # 获取详情信息
             cp "$modsPath/workshop-${id}/modinfo.lua" ${DST_SHELL_PATH}/cache/mod/${id}.lua
+            echo "" >> ${DST_SHELL_PATH}/cache/mod/${id}.lua
             echo "print(name,'++++++++++',description,'++++++++++',author,'++++++++++',version)" >> ${DST_SHELL_PATH}/cache/mod/${id}.lua
             info=$(lua ${DST_SHELL_PATH}/cache/mod/${id}.lua)
             info=$(echo $info | sed -E "s/\n/\\n/g" )
