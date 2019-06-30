@@ -1,0 +1,14 @@
+使用：
+
+    dst <command> [args]
+
+命令：
+
+    help                 显示帮助
+    mod     [args]       组件管理
+    save    [args]       存档管理
+    init                 初始化服务器
+    start                启动服务器
+    stop                 停止服务器
+    restart              重启服务器
+    update               更新服务器

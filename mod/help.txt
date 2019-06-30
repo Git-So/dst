@@ -1,0 +1,14 @@
+使用：
+
+    dst mod <command> [args]
+
+命令：
+
+    help          显示帮助
+    list          组件列表
+    info   [id]   组件详情
+    add    [id]   添加组件
+    del    [id]   删除组件
+    sort          整理组件
+    clear         清理组件,使用组件缓存数据加载组件
+    cache         缓存组件信息，将已加载组件数据缓存

@@ -1,0 +1,10 @@
+使用：
+
+    dst save <command> [args]
+
+命令：
+
+    help            显示帮助
+    list            存档列表
+    load   [name]   加载存档
+    now             立即备份
