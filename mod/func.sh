@@ -78,7 +78,7 @@ Del() {
         if [ $(isNumber "$id") -eq 0 ]; then
             echo "删除编号不合法，必须为纯数字"
         else
-            line=$(grep -n "^${id}++++++++++" ${DST_SHELL_PATH}/cache/mod/list.cache )
+            line=$(grep -n "^${id}++++++++++" ${DST_SHELL_PATH}/cache/mod/list.cache | head -n 1 | awk -F: '{print $1}' )
             sed -i "${line}d" ${DST_SHELL_PATH}/cache/mod/list.cache
         fi
     done
