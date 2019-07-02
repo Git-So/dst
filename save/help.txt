@@ -8,3 +8,4 @@
     list            存档列表
     load   [name]   加载存档
     now             立即备份
+    log             查看数据操作日志
