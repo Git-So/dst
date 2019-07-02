@@ -34,3 +34,10 @@ checkCommand() {
 isNumber() {
     echo "$1" | grep -c "^[0-9]\+$"
 }
+
+# now
+# 获取当前时间
+# @return string [date]
+now() {
+    date "+%Y-%m-%d %H:%M:%S"
+}

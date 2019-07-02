@@ -31,6 +31,9 @@ main() {
         "cache")
             Cache
         ;;
+        "log")
+            Log
+        ;;
         *)
             Help
         ;;

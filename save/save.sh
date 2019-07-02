@@ -19,6 +19,9 @@ main() {
         "now")
             Now
         ;;
+        "log")
+            Log
+        ;;
         *)
             Help
         ;;

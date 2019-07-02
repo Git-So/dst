@@ -43,8 +43,6 @@ Info() {
             printf("版本：%s\n\n",version);
         }'
     fi
-
-
 }
 
 # mod add
@@ -59,6 +57,7 @@ Add() {
             echo "添加编号不合法，必须为纯数字"
         else
             echo "${id}++++++++++" >> ${DST_SHELL_PATH}/cache/mod/list.cache
+            ModLog "尝试添加组件 ${id}"
         fi
     done
 
@@ -80,6 +79,7 @@ Del() {
         else
             line=$(grep -n "^${id}++++++++++" ${DST_SHELL_PATH}/cache/mod/list.cache | head -n 1 | awk -F: '{print $1}' )
             sed -i "${line}d" ${DST_SHELL_PATH}/cache/mod/list.cache
+            ModLog "尝试删除组件 ${id}"
         fi
     done
 
@@ -164,8 +164,23 @@ Cache() {
     Sort
 }
 
+# mod log
+# 查看日志
+Log() {
+    mkdir -p  ${DST_SHELL_PATH}/cache/mod/
+    touch ${DST_SHELL_PATH}/cache/mod/mod.log
+    cat ${DST_SHELL_PATH}/cache/mod/mod.log
+}
+
 # mod help
 # 命令帮助
 Help() {
     cat ${DST_SHELL_PATH}/mod/help.txt
+}
+
+# modLog
+# 写入日志
+ModLog() {
+    mkdir -p  ${DST_SHELL_PATH}/cache/mod/
+    echo "[$(now)] $*" >> ${DST_SHELL_PATH}/cache/mod/mod.log
 }
