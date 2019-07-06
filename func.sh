@@ -27,7 +27,7 @@ Restart() {
 # update
 # 更新 dst
 Update() {
-    stop
+    Stop
     docker rm dst
     init
 }
