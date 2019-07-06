@@ -96,7 +96,7 @@ Sort() {
 
     # 删除客户端mod
     cat ${DST_SHELL_PATH}/cache/mod/list.cache \
-    | awk 'BEGIN{OFS="++++++++++";}{if ($6 != "true")print}' > ${DST_SHELL_PATH}/cache/mod/list.cache.tmp
+    | awk -F "\++" 'BEGIN{OFS="++++++++++";}{NF=NF;gsub(/\ /,"",$6);if ($6 != "true")print}' > ${DST_SHELL_PATH}/cache/mod/list.cache.tmp
 
     # 排序去重
     sort ${DST_SHELL_PATH}/cache/mod/list.cache.tmp \
