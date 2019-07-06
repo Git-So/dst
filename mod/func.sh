@@ -94,13 +94,14 @@ Sort() {
     # 删除空行
     sed -i "/^\s*$/d" ${DST_SHELL_PATH}/cache/mod/list.cache > /dev/null
 
-    # 排序去重
+    # 删除客户端mod
     cat ${DST_SHELL_PATH}/cache/mod/list.cache \
-    | sort \
-    | uniq > ${DST_SHELL_PATH}/cache/mod/list.cache.tmp
+    | awk 'BEGIN{OFS="++++++++++";}{if ($6 != "true")print}' > ${DST_SHELL_PATH}/cache/mod/list.cache.tmp
 
-    rm ${DST_SHELL_PATH}/cache/mod/list.cache
-    mv ${DST_SHELL_PATH}/cache/mod/list.cache.tmp ${DST_SHELL_PATH}/cache/mod/list.cache
+    # 排序去重
+    sort ${DST_SHELL_PATH}/cache/mod/list.cache.tmp \
+    | uniq > ${DST_SHELL_PATH}/cache/mod/list.cache
+
 }
 
 # mod clear
@@ -152,7 +153,7 @@ Cache() {
             # 获取详情信息
             cp "$modsPath/workshop-${id}/modinfo.lua" ${DST_SHELL_PATH}/cache/mod/${id}.lua
             echo "" >> ${DST_SHELL_PATH}/cache/mod/${id}.lua
-            echo "print(name,'++++++++++',description,'++++++++++',author,'++++++++++',version)" >> ${DST_SHELL_PATH}/cache/mod/${id}.lua
+            echo "print(name,'++++++++++',description,'++++++++++',author,'++++++++++',version,'++++++++++',client_only_mod)" >> ${DST_SHELL_PATH}/cache/mod/${id}.lua
             info=$(lua ${DST_SHELL_PATH}/cache/mod/${id}.lua)
             info=$(echo $info | sed -E "s/\n/\\n/g" )
             echo "${id}++++++++++${info}" | sed -E "s/\s+/ /g" >> ${DST_SHELL_PATH}/cache/mod/list.cache
